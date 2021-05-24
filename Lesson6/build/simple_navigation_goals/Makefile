@@ -78,16 +78,16 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
 
-# Special rule for the target test
-test/fast: test
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
 
-.PHONY : test/fast
+.PHONY : rebuild_cache/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -100,17 +100,6 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
-
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -122,16 +111,27 @@ install/strip/fast: install/strip
 
 .PHONY : install/strip/fast
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
 
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
+# Special rule for the target install/local
+install/local/fast: install/local
 
-.PHONY : rebuild_cache/fast
+.PHONY : install/local/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,231 +166,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_py: simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_py.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_py
-
-# fast build rule for target.
-move_base_msgs_generate_messages_py/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_py.dir/build.make simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_py.dir/build
-.PHONY : move_base_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_nodejs: simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
-.PHONY : rosgraph_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_cpp: simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_cpp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_cpp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
-.PHONY : actionlib_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_nodejs: simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : std_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-std_msgs_generate_messages_nodejs/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
-.PHONY : std_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_eus: simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_eus
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_eus/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
-.PHONY : actionlib_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_lisp: simple_navigation_goals/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-
-.PHONY : actionlib_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_generate_messages_lisp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_generate_messages_lisp.dir/build
-.PHONY : actionlib_generate_messages_lisp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_eus: simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_eus.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_eus
-
-# fast build rule for target.
-move_base_msgs_generate_messages_eus/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_eus.dir/build.make simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_eus.dir/build
-.PHONY : move_base_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_nodejs: simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_nodejs/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
-.PHONY : actionlib_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_cpp: simple_navigation_goals/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-
-.PHONY : actionlib_generate_messages_cpp
-
-# fast build rule for target.
-actionlib_generate_messages_cpp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_generate_messages_cpp.dir/build
-.PHONY : actionlib_generate_messages_cpp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_py: simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-.PHONY : std_msgs_generate_messages_py
-
-# fast build rule for target.
-std_msgs_generate_messages_py/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_py.dir/build.make simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_py.dir/build
-.PHONY : std_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_nodejs: simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-move_base_msgs_generate_messages_nodejs/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/build.make simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_nodejs.dir/build
-.PHONY : move_base_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_cpp: simple_navigation_goals/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
-
-.PHONY : roscpp_generate_messages_cpp
-
-# fast build rule for target.
-roscpp_generate_messages_cpp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make simple_navigation_goals/CMakeFiles/roscpp_generate_messages_cpp.dir/build
-.PHONY : roscpp_generate_messages_cpp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_py: simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_py
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_py/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
-.PHONY : actionlib_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_cpp: simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_cpp
-
-# fast build rule for target.
-move_base_msgs_generate_messages_cpp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/build.make simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_cpp.dir/build
-.PHONY : move_base_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_lisp: simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_lisp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
-.PHONY : actionlib_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
 simple_navigation_goals/CMakeFiles/simple_navigation_goals.dir/rule:
 	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/simple_navigation_goals.dir/rule
 .PHONY : simple_navigation_goals/CMakeFiles/simple_navigation_goals.dir/rule
@@ -404,231 +179,6 @@ simple_navigation_goals: simple_navigation_goals/CMakeFiles/simple_navigation_go
 simple_navigation_goals/fast:
 	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/simple_navigation_goals.dir/build.make simple_navigation_goals/CMakeFiles/simple_navigation_goals.dir/build
 .PHONY : simple_navigation_goals/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_nodejs: simple_navigation_goals/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-
-.PHONY : actionlib_generate_messages_nodejs
-
-# fast build rule for target.
-actionlib_generate_messages_nodejs/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
-.PHONY : actionlib_generate_messages_nodejs/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_lisp: simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : std_msgs_generate_messages_lisp
-
-# fast build rule for target.
-std_msgs_generate_messages_lisp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-.PHONY : std_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_generate_messages_py.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_generate_messages_py.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_generate_messages_py.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_py: simple_navigation_goals/CMakeFiles/actionlib_generate_messages_py.dir/rule
-
-.PHONY : actionlib_generate_messages_py
-
-# fast build rule for target.
-actionlib_generate_messages_py/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_generate_messages_py.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_generate_messages_py.dir/build
-.PHONY : actionlib_generate_messages_py/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-move_base_msgs_generate_messages_lisp: simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : move_base_msgs_generate_messages_lisp
-
-# fast build rule for target.
-move_base_msgs_generate_messages_lisp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build.make simple_navigation_goals/CMakeFiles/move_base_msgs_generate_messages_lisp.dir/build
-.PHONY : move_base_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_eus: simple_navigation_goals/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_generate_messages_eus
-
-# fast build rule for target.
-actionlib_generate_messages_eus/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/actionlib_generate_messages_eus.dir/build.make simple_navigation_goals/CMakeFiles/actionlib_generate_messages_eus.dir/build
-.PHONY : actionlib_generate_messages_eus/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/roscpp_generate_messages_py.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/roscpp_generate_messages_py.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_py: simple_navigation_goals/CMakeFiles/roscpp_generate_messages_py.dir/rule
-
-.PHONY : roscpp_generate_messages_py
-
-# fast build rule for target.
-roscpp_generate_messages_py/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/roscpp_generate_messages_py.dir/build.make simple_navigation_goals/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_eus: simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_eus
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-.PHONY : rosgraph_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_lisp: simple_navigation_goals/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
-
-.PHONY : roscpp_generate_messages_lisp
-
-# fast build rule for target.
-roscpp_generate_messages_lisp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make simple_navigation_goals/CMakeFiles/roscpp_generate_messages_lisp.dir/build
-.PHONY : roscpp_generate_messages_lisp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_eus: simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
-
-.PHONY : std_msgs_generate_messages_eus
-
-# fast build rule for target.
-std_msgs_generate_messages_eus/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_eus.dir/build
-.PHONY : std_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_eus: simple_navigation_goals/CMakeFiles/roscpp_generate_messages_eus.dir/rule
-
-.PHONY : roscpp_generate_messages_eus
-
-# fast build rule for target.
-roscpp_generate_messages_eus/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/roscpp_generate_messages_eus.dir/build.make simple_navigation_goals/CMakeFiles/roscpp_generate_messages_eus.dir/build
-.PHONY : roscpp_generate_messages_eus/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_cpp: simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : std_msgs_generate_messages_cpp
-
-# fast build rule for target.
-std_msgs_generate_messages_cpp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make simple_navigation_goals/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
-.PHONY : std_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_cpp: simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_cpp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_py: simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_py
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_py/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
-.PHONY : rosgraph_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-roscpp_generate_messages_nodejs: simple_navigation_goals/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
-
-.PHONY : roscpp_generate_messages_nodejs
-
-# fast build rule for target.
-roscpp_generate_messages_nodejs/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make simple_navigation_goals/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
-.PHONY : roscpp_generate_messages_nodejs/fast
-
-# Convenience name for target.
-simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f CMakeFiles/Makefile2 simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-.PHONY : simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-rosgraph_msgs_generate_messages_lisp: simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : rosgraph_msgs_generate_messages_lisp
-
-# fast build rule for target.
-rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/workspace/Lesson6/build && $(MAKE) -f simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make simple_navigation_goals/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
-.PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 src/simple_navigation_goals.o: src/simple_navigation_goals.cpp.o
 
@@ -665,42 +215,12 @@ help:
 	@echo "... depend"
 	@echo "... install"
 	@echo "... list_install_components"
-	@echo "... test"
-	@echo "... edit_cache"
-	@echo "... install/local"
-	@echo "... install/strip"
-	@echo "... move_base_msgs_generate_messages_py"
-	@echo "... rosgraph_msgs_generate_messages_nodejs"
-	@echo "... actionlib_msgs_generate_messages_cpp"
-	@echo "... std_msgs_generate_messages_nodejs"
-	@echo "... actionlib_msgs_generate_messages_eus"
-	@echo "... actionlib_generate_messages_lisp"
-	@echo "... move_base_msgs_generate_messages_eus"
-	@echo "... actionlib_msgs_generate_messages_nodejs"
-	@echo "... actionlib_generate_messages_cpp"
-	@echo "... std_msgs_generate_messages_py"
-	@echo "... move_base_msgs_generate_messages_nodejs"
-	@echo "... roscpp_generate_messages_cpp"
-	@echo "... actionlib_msgs_generate_messages_py"
-	@echo "... move_base_msgs_generate_messages_cpp"
-	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... rebuild_cache"
 	@echo "... simple_navigation_goals"
-	@echo "... actionlib_generate_messages_nodejs"
-	@echo "... std_msgs_generate_messages_lisp"
-	@echo "... actionlib_generate_messages_py"
-	@echo "... move_base_msgs_generate_messages_lisp"
-	@echo "... actionlib_generate_messages_eus"
-	@echo "... roscpp_generate_messages_py"
-	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... roscpp_generate_messages_lisp"
-	@echo "... std_msgs_generate_messages_eus"
-	@echo "... roscpp_generate_messages_eus"
-	@echo "... std_msgs_generate_messages_cpp"
-	@echo "... rosgraph_msgs_generate_messages_cpp"
-	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... roscpp_generate_messages_nodejs"
-	@echo "... rosgraph_msgs_generate_messages_lisp"
+	@echo "... edit_cache"
+	@echo "... install/strip"
+	@echo "... install/local"
+	@echo "... test"
 	@echo "... src/simple_navigation_goals.o"
 	@echo "... src/simple_navigation_goals.i"
 	@echo "... src/simple_navigation_goals.s"
